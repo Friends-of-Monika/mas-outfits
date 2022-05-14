@@ -5,7 +5,15 @@ A submod that allows you to save monika outfits!
 
 Screeshots of the mod do not have expressions implmented.
 
+### Can you wear an outfit?
+<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/load_example.jpg" style="height:300px;padding:20px">
+
+### Can you save an outfit?
+<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/save_example.jpg" style="height:300px;padding:20px">
+
 ## Todo
+
+### Monika expressions
 
 ### Grammer and spelling
 I cant spell
