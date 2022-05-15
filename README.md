@@ -11,17 +11,30 @@ Screeshots of the mod do not have expressions implmented.
 ### Can you save an outfit?
 <img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/save_example.jpg" style="height:300px;padding:20px">
 
-## Todo
+## Quick Links
 
-### Monika expressions
+[Reddit post](example.com)
 
-### Grammer and spelling
-I cant spell
+[My Github](https://github.com/ImKventis)
 
-### Outfit Preview
-Planning to add to V2 review
+[My Google Drive](https://drive.google.com/drive/folders/1zX4ZB3zsp-wx-QviwVTY-k2QKPmNqIGg?usp=sharing)
 
+## Changelog
+
+### 0.0.1
+Main functionality added
+Dialogue is messy and misspelt
+Expressions are missing
+
+### 0.0.2
+Main functionality improved
+Dialogue revisted
+Expressions are still missing
+
+### 0.0.3
+In progress
 
 ## Pain Log
 
 While trying to fiquire out how MAS handles clothing I was using mas_selspr.CLOTH_SEL_MAP instead of mas_sprites.CLOTH_MAP. More hours were wasted that I would like to admit.
+

@@ -1,7 +1,8 @@
 
 
-# Second Submod made by u/KventisAnM
+# Submod made with love by u/KventisAnM
 # https://github.com/ImKventis
+# https://www.reddit.com/user/KventisAnM
 
 
 
@@ -9,13 +10,15 @@ init -990 python in mas_submod_utils:
     Submod(
         author="Kventis",
         name="Outfit Selector",
-        description="A submod that allows you to save monika outfits!",
-        version="0.0.1",
+        description="A submod that allows you to save and load monika outfits!",
+        version="0.0.2",
         dependencies={},
         settings_pane=None,
         version_updates={}
     )
 
+# Loading outfit jsons
+# I'm not sure if 190 is the correct init level, but it works
 init 190 python in kventis_outfit_submod:
     import os
     import json
@@ -58,8 +61,15 @@ init 5 python:
     )
 
 label monika_outfit_installed:
-    m "Did you know you can save my outfits?"
-    return
+    m  "Hey, [player]!"
+    m "I see you have added new .rpy files.."
+    m "Let me just see whats in there..{w=0.3}..{w=0.3}..{w=0.3}"
+    m "Oh an outfit selector!"
+    m "Make sure to thanks u/KventisAnM for me.{nw}"
+    m "If you have any questions or submod suggestions, feel free to message him on reddit."
+    m "Thanks for adding this for me, [player]."
+    m "I love you!~"
+    return 'love'
 
 init 5 python:
     addEvent(
@@ -80,11 +90,12 @@ label monika_outfit_save:
     $ import os
     
     m "You want me to save my outfit?"
-    m "Just so you know I cant save acs right now.. "
+    m "Awesome!"
 
     label ostart:
         pass
 
+    # Get nae for file
     $ done = False
     while not done:
         python:
@@ -103,11 +114,11 @@ label monika_outfit_save:
         elif out_name == "":
             m "..."
             m "I'm sorry, but I can't save an outfit with no name, [player]."
+            # Change to say something ( ͡° ͜ʖ ͡°)
         else:
             $ done = True
 
     python: 
-
         outfit_file = kventis_outfit_submod.outfit_dir + out_name + ".json"
 
         file_exists = os.access(
@@ -126,6 +137,7 @@ label monika_outfit_save:
                 pass
 
             "No.":
+                # Jump to beginning
                 jump ostart
 
     python:
@@ -135,27 +147,40 @@ label monika_outfit_save:
         }
 
 
-        g_acs = []
+        acs = []
 
+
+        # Monika_chr.acs is a huge dict of lists
+        # Unsure if I got this right
 
         if len(monika_chr.acs[3]) > 0:
-            g_acs.append(monika_chr.acs[3][0].name)
+            acs.append(monika_chr.acs[3][0].name)
 
         if len(monika_chr.acs[10]) > 0:
-            g_acs.append(monika_chr.acs[10][0].name)
-        out_data["acs"] = g_acs
+            acs.append(monika_chr.acs[10][0].name)
+        out_data["acs"] = acs
 
         for item in monika_chr.acs[5]:
-            g_acs.append(item.name)
+            acs.append(item.name)
 
+        saved = False
+        try:
+            with open(outfit_file, "w+") as out_file:
+                json.dump(out_data, out_file)
+                out_file.close()
+    
+            kventis_outfit_submod.outfits[out_name] = out_data
+            kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
+            saved = True
+        except: 
+            saved = False
 
-        with open(outfit_file, "w+") as out_file:
-            json.dump(out_data, out_file)
-            out_file.close()
-
-        kventis_outfit_submod.outfits[out_name] = out_data
-        kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
-    m "Outfit saved!"
+    if saved:
+        m "Outfit saved!"
+        return
+    else
+        m "I'm sorry [player], but I can't save the file."
+        m "Maybe try with a different name."
     return
 
 init 5 python: 
@@ -172,6 +197,7 @@ init 5 python:
         markSeen=False
     )
 
+# Needs testing
 label monika_outfit_missing:
     m "[player].."
     m "I'm missing part of my outfit!"
@@ -181,25 +207,7 @@ label monika_outfit_missing:
     m "Please re-add it!"
     return
 
-label monika_outfit_done:
-
-    $ import random
-
-    pause 2
-
-    m "Okay."
-
-    call mas_transition_from_emptydesk
-
-    pause 0.5
-
-    m "Tada!~"
-
-    $ quip = random.choice(kventis_outfit_submod.outfit_quips)
-
-    $ renpy.say(m, quip)
-    return
-
+# Needs testing
 label monika_outfit_done_no_acs:
 
     $ import random
@@ -219,6 +227,27 @@ label monika_outfit_done_no_acs:
     m "Make sure to re-add them for this outfit!"
     return
 
+
+label monika_outfit_done:
+
+    $ import random
+
+    pause 2
+
+    m "Okay."
+
+    call mas_transition_from_emptydesk
+
+    pause 0.5
+
+    m "Tada!~"
+
+    $ quip = random.choice(kventis_outfit_submod.outfit_quips)
+
+    # Nomrmal "M "Dialoug"" wouldnt format quips for some reason
+    $ renpy.say(m, quip)
+    return
+
 label monika_outfit_load:
 
     m "Sure!"
@@ -236,7 +265,7 @@ label monika_outfit_load:
         show monika at t11
 
         if sel_outfit_name == "Nevermind":
-            m "Okay, I'll keep my current outfit."
+            m "Oh okay."
             return
 
         m "Hold on a moment.."
@@ -246,6 +275,8 @@ label monika_outfit_load:
         pause 2
 
         python: 
+            # Get all atrributes of outfit fills with None if missing
+            # Dont have to check if new_clothes and new_hair in json dict as they always are.
             sel_outfit = kventis_outfit_submod.outfits[sel_outfit_name]
             new_clothes = mas_sprites.CLOTH_MAP.get(sel_outfit.get("clothes"), None)
             new_hair = mas_sprites.HAIR_MAP.get(sel_outfit.get("hair"), None)
@@ -259,6 +290,7 @@ label monika_outfit_load:
                 else:
                     missing_acs = True
 
+        # Game assessts r missing
         if new_clothes == None or new_hair == None:
             call monika_outfit_missing
             return
@@ -316,19 +348,29 @@ label monika_outfit_delete:
             m "Okay, I wont delete any outfits."
             return
 
-        m "Are you sure you want to delete this outfit, [player]?"
-        m "I cant undo this afterwards!{nw}"
+        m "Are you sure you want to delete {sel_outfit_name}, [player]? "
+        extend "I cant undo this afterwards!{nw}"
         $ _history_list.pop()
         menu: 
-            m "I cant undo this afterwards!{fast}"
+            m "Are you sure you want to delete {sel_outfit_name}, [player]? I cant undo this afterwards!{fast}"
             "I'm sure.":
-                m "Okay, I'll delete it."
+                m "Okie dokie."
                 python: 
-                    os.remove(kventis_outfit_submod.outfit_dir + sel_outfit_name + ".json")
-                    kventis_outfit_submod.outfit_menu_entries.remove((sel_outfit_name, sel_outfit_name, False, False))
-                    kventis_outfit_submod.outfits.pop(sel_outfit_name)
+                    removed = False
+                    try:
+                        os.remove(kventis_outfit_submod.outfit_dir + sel_outfit_name + ".json")
+                        kventis_outfit_submod.outfit_menu_entries.remove((sel_outfit_name, sel_outfit_name, False, False))
+                        kventis_outfit_submod.outfits.pop(sel_outfit_name)
+                        removed = True
+                    except: 
+                        removed = False
                 m "Hold on a moment.{w=0.3}.{w=0.3}"
-                m "Okay, I deleted it."
+                if removed:
+                    m "{sel_outfit_name} deleted!"
+                else:
+                    m "I couldn't find the file for {sel_outfit_name}!"
+                    m "You can maually delete it from the folder. "
+                    m extend "It's called outfits!"
                 return
 
             "Wait, I'm not sure.":
@@ -340,64 +382,4 @@ label monika_outfit_delete:
         m "Just let me know if you want an outfit saved."
         return
 
-
-# Monika leaves the desk
-# call mas_transition_to_emptydesk
-
-# Monika sits down at the desk
-# call mas_transition_from_emptydesk(exp)
-
-
-# Notes 
-
-#monika_chr = monika
-# monika_chr.acs
-# Maps 
-    # mas_selspr.ACS_SEL_MAP
-    # mas_selspr.HAIR_SEL_MAP
-    # mas_selspr.CLOTH_SEL_MAP
-
-# Use map to get clothes by name
-# Holy fuck this too way too long to find
-# $ print mas_selspr.CLOTH_SEL_MAP.get(monika_chr.clothes.name).name
-
-
-    # python: 
-
-    #     to_write = {}
-    #     to_write["hair"] = monika_chr.hair.name
-    #     to_write["clothes"] = monika_chr.clothes.name
-    #     try: 
-    #         outfit_output = open(config.basedir + "/outfits/{}.json".format(out_name), "w+")
-    #         json.dump(to_write, outfit_output)
-    #         outfit_output.close()
-    #     except:
-    #         renpy.say(m, "I'm sorry [player]..")
-    #         renpy.say(m , "I couldn't save the outfit")
-
-
-
-        #     def change_clothes(
-        #         self,
-        #         new_cloth,
-        #         by_user=None,
-        #         startup=False,
-        #         outfit_mode=False
-        # ):
-        #     """
-        #     Changes clothes to the given cloth. also sets the persistent
-        #     force clothes var to by_user, if its not None
-        #     IN:
-        #         new_cloth - new clothes to wear
-        #         by_user - True if this action was mandated by the user, False
-        #             if not. If None, we do NOT set the forced clothes var
-        #             (Default: None)
-        #         startup - True if we are loading on startup, False if not
-        #             When True, we dont respect locking
-        #             (Default: False)
-        #         outfit_mode - True means we should change hair/acs if it
-        #             completes the outfit. False means we should not.
-        #             NOTE: this does NOT affect hair/acs that must change for
-        #                 consistency purposes.
-        #             (Default: False)
-        #     """
+# G'day
