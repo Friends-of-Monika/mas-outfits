@@ -23,13 +23,18 @@ Screeshots of the mod do not have expressions implmented.
 
 ### 0.0.1
 Main functionality added
+
 Dialogue is messy and misspelt
+
 Expressions are missing
 
 ### 0.0.2
 Main functionality improved
+
 Dialogue revisted
+
 Expressions are still missing
+
 
 ### 0.0.3
 In progress
