@@ -35,7 +35,7 @@ init 190 python in kventis_outfit_submod:
 
     if len(outfit_files) != 0:
         for tf in outfit_files:
-            print tf
+            # print tf
             if tf.endswith(".json") == False:
                 continue
             try:
@@ -44,10 +44,11 @@ init 190 python in kventis_outfit_submod:
                 f.close()
                 outfits[tf[:-5]] = data
                 outfit_menu_entries.append((tf[:-5], tf[:-5], False, False))
-                print outfit_menu_entries[0][1]
+               # print outfit_menu_entries[0][1]
             except Exception as e:
-                print e
-    print outfits
+               # print e
+               continue
+   # print outfits
 
 # Should run once on install with high aff
 init 5 python:
