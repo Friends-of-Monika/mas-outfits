@@ -23,7 +23,7 @@ init 190 python in kventis_outfit_submod:
     import os
     import json
 
-    outfit_dir =  "outfits/" 
+    outfit_dir = os.path.join(renpy.config.basedir, "outfits")    
 
     outfit_files = os.listdir(outfit_dir)
 
@@ -39,14 +39,15 @@ init 190 python in kventis_outfit_submod:
             if tf.endswith(".json") == False:
                 continue
             try:
-                f = open(outfit_dir + tf, "r")
+                f = open(os.path.join(outfit_dir, tf), "r")
                 data = json.load(f)
                 f.close()
                 outfits[tf[:-5]] = data
                 outfit_menu_entries.append((tf[:-5], tf[:-5], False, False))
                 print outfit_menu_entries[0][1]
-            except:
-                continue
+            except Exception as e:
+                print e
+    print outfits
 
 # Should run once on install with high aff
 init 5 python:
@@ -119,7 +120,7 @@ label monika_outfit_save:
             $ done = True
 
     python: 
-        outfit_file = kventis_outfit_submod.outfit_dir + out_name + ".json"
+        outfit_file = os.path.join(kventis_outfit_submod.outfit_dir, out_name + ".json")
 
         file_exists = os.access(
                 os.path.normcase(outfit_file),
@@ -178,7 +179,7 @@ label monika_outfit_save:
     if saved:
         m "Outfit saved!"
         return
-    else
+    else:
         m "I'm sorry [player], but I can't save the file."
         m "Maybe try with a different name."
     return
@@ -347,18 +348,18 @@ label monika_outfit_delete:
         if sel_outfit_name == "Nevermind":
             m "Okay, I wont delete any outfits."
             return
-
-        m "Are you sure you want to delete {sel_outfit_name}, [player]? "
+        
+        m "Are you sure you want to delete [sel_outfit_name], [player]? "
         extend "I cant undo this afterwards!{nw}"
         $ _history_list.pop()
         menu: 
-            m "Are you sure you want to delete {sel_outfit_name}, [player]? I cant undo this afterwards!{fast}"
+            m "Are you sure you want to delete [sel_outfit_name], [player]? I cant undo this afterwards!{fast}"
             "I'm sure.":
                 m "Okie dokie."
                 python: 
                     removed = False
                     try:
-                        os.remove(kventis_outfit_submod.outfit_dir + sel_outfit_name + ".json")
+                        os.remove(os.path.join(kventis_outfit_submod.outfit_dir, sel_outfit_name + ".json"))
                         kventis_outfit_submod.outfit_menu_entries.remove((sel_outfit_name, sel_outfit_name, False, False))
                         kventis_outfit_submod.outfits.pop(sel_outfit_name)
                         removed = True
@@ -366,9 +367,9 @@ label monika_outfit_delete:
                         removed = False
                 m "Hold on a moment.{w=0.3}.{w=0.3}"
                 if removed:
-                    m "{sel_outfit_name} deleted!"
+                    m "[sel_outfit_name] deleted!"
                 else:
-                    m "I couldn't find the file for {sel_outfit_name}!"
+                    m "I couldn't find the file for [sel_outfit_name]!"
                     m "You can maually delete it from the folder. "
                     m extend "It's called outfits!"
                 return
