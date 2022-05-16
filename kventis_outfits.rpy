@@ -31,7 +31,7 @@ init 190 python in kventis_outfit_submod:
 
     outfit_menu_entries = []
 
-    outfit_quips = ["I love this outfit!", "Good choice, [player].", "Thank you for this outfit, [player]."]
+    outfit_quips = ["I love this outfit!", "Good choice, [player].", "Thanks again for this outfit, [player]."]
 
     if len(outfit_files) != 0:
         for tf in outfit_files:
@@ -111,12 +111,11 @@ label monika_outfit_save:
 
         #Check if we should return
         if out_name == "cancel_input":
-            m "Oh okay"
+            m "Oh okay."
             return
         elif out_name == "":
             m "..."
             m "I'm sorry, but I can't save an outfit with no name, [player]."
-            # Change to say something ( ͡° ͜ʖ ͡°)
         else:
             $ done = True
 
@@ -141,7 +140,8 @@ label monika_outfit_save:
             "No.":
                 # Jump to beginning
                 jump ostart
-
+    
+    m "Hold on a moment.{w=0.3}.{w=0.3}"
     python:
         out_data = {
             "hair": monika_chr.hair.name,
@@ -205,6 +205,7 @@ label monika_outfit_missing:
     m "I'm missing part of my outfit!"
     m "Did you remove it?"
     call mas_transition_from_emptydesk
+    pause 1
     m "I really liked that outfit too.."
     m "Please re-add it!"
     return
@@ -240,7 +241,7 @@ label monika_outfit_done:
 
     call mas_transition_from_emptydesk
 
-    pause 0.5
+    pause 1
 
     m "Tada!~"
 
@@ -372,7 +373,7 @@ label monika_outfit_delete:
                 else:
                     m "I couldn't find the file for [sel_outfit_name]!"
                     m "You can maually delete it from the folder. "
-                    m extend "It's called outfits!"
+                    m extend "It's called '[sel_outfit_name].json' in the folder 'outfits'!"
                 return
 
             "Wait, I'm not sure.":
@@ -385,3 +386,4 @@ label monika_outfit_delete:
         return
 
 # G'day
+# - British man
