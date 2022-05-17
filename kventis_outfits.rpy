@@ -389,7 +389,7 @@ label monika_outfit_delete:
                         removed = False
                 m 2dua "Hold on a moment.{w=0.3}.{w=0.3}"
                 if removed:
-                   3eub  m "[sel_outfit_name] deleted!"
+                   m 3eub "[sel_outfit_name] deleted!"
                 else:
                     m 1euc "I couldn't find the file for [sel_outfit_name]!"
                     m 3lksdlb "You can maually delete it from the folder. "
