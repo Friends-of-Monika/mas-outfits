@@ -1,5 +1,6 @@
 # MASOutfits
 A submod that allows you to save monika outfits!
+Download it [Here](https://github.com/ImKventis/MASOutfits/releases/latest)
 
 ## Sharing Outfits
 You can share outfits with other users by sending the .jsons inside the outfits folder both users must have the same spritepacks installed for it work.
