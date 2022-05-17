@@ -179,11 +179,12 @@ label monika_outfit_save:
 
         if len(monika_chr.acs[10]) > 0:
             acs.append(monika_chr.acs[10][0].name)
-        out_data["acs"] = acs
 
         for item in monika_chr.acs[5]:
             acs.append(item.name)
 
+        out_data["acs"] = acs
+        
         saved = False
         try:
             with open(outfit_file, "w+") as out_file:
