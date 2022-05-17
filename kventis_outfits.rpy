@@ -11,7 +11,7 @@ init -990 python in mas_submod_utils:
         author="Kventis",
         name="Outfit Selector",
         description="A submod that allows you to save and load monika outfits!",
-        version="0.0.2",
+        version="1.0.0",
         dependencies={},
         settings_pane=None,
         version_updates={}
@@ -62,16 +62,36 @@ init 5 python:
         )
     )
 
+init 5 python:
+    addEvent(
+        Event(
+              persistent.event_database,
+              eventlabel="monika_outfit_installed_talk",
+              prompt="Can you tell me about custom outfits?",
+              category=['clothes'],
+              pool=True,
+              unlocked=True,
+              aff_range=(mas_aff.NORMAL, None)
+        ),
+        markSeen=False
+)
+
 label monika_outfit_installed:
-    m  "Hey, [player]!"
-    m "I see you have added new .rpy files.."
-    m "Let me just see whats in there..{w=0.3}..{w=0.3}..{w=0.3}"
-    m "Oh an outfit selector!"
-    m "Make sure to thanks u/KventisAnM for me.{nw}"
-    m "If you have any questions or submod suggestions, feel free to message him on reddit."
-    m "Thanks for adding this for me, [player]."
-    m "I love you!~"
-    return 'love'
+    m 1eua  "Hey, [player]."
+    m 1wub "I see you have added new .rpy files! "
+    extend 2dua  "Let me just see whats in there.{w=0.3}.{w=0.3}.{w=0.3}"
+    m 3wua "Oh an outfit selector!"
+    m 1eua "Make sure to thanks u/KventisAnM for me."
+    m 3eua "Oh he left a message for you.  "
+    extend 3sua  "\"If you have any questions or submod suggestions, feel free to message me on reddit.\""
+    m 1gua "Well isn't that neat!"
+    m 1hua "Thanks for adding this for me, [player]."
+    m 1hubsb "I love you!~"
+    return "love"
+
+label monika_outfit_installed_talk:
+    call monika_outfit_installed
+    return "love"
 
 init 5 python:
     addEvent(
@@ -91,8 +111,7 @@ label monika_outfit_save:
     $ import json
     $ import os
     
-    m "You want me to save my outfit?"
-    m "Awesome!"
+    m 1hua "Sure!"
 
     label ostart:
         pass
@@ -111,11 +130,11 @@ label monika_outfit_save:
 
         #Check if we should return
         if out_name == "cancel_input":
-            m "Oh okay."
-            return
+            m 1euc "Oh okay."
+            return "prompt"
         elif out_name == "":
-            m "..."
-            m "I'm sorry, but I can't save an outfit with no name, [player]."
+            m 2lusdla "..."
+            m 1eka "I'm sorry, but I can't save an outfit with no name, [player]."
         else:
             $ done = True
 
@@ -128,7 +147,7 @@ label monika_outfit_save:
             )
 
     if file_exists:
-        m "I already have an outfit saved called '[out_name]'"
+        m 1eka "I already have an outfit saved called '[out_name]'"
         m "Should I overwrite it?{nw}"
         $ _history_list.pop()
         menu:
@@ -141,7 +160,7 @@ label monika_outfit_save:
                 # Jump to beginning
                 jump ostart
     
-    m "Hold on a moment.{w=0.3}.{w=0.3}"
+    m 2dua "Hold on a moment.{w=0.3}.{w=0.3}"
     python:
         out_data = {
             "hair": monika_chr.hair.name,
@@ -178,11 +197,11 @@ label monika_outfit_save:
             saved = False
 
     if saved:
-        m "Outfit saved!"
+        m 3eub "Outfit saved!"
         return
     else:
-        m "I'm sorry [player], but I can't save the file."
-        m "Maybe try with a different name."
+        m 2eksdlc "I'm sorry [player], but I can't save the file."
+        m 1eksdlc "Maybe try with a different name."
     return
 
 init 5 python: 
@@ -206,8 +225,8 @@ label monika_outfit_missing:
     m "Did you remove it?"
     call mas_transition_from_emptydesk
     pause 1
-    m "I really liked that outfit too.."
-    m "Please re-add it!"
+    m 2dkd "I really liked that outfit too.."
+    m 2ekd "Please re-add it!"
     return
 
 # Needs testing
@@ -223,11 +242,11 @@ label monika_outfit_done_no_acs:
 
     pause 0.5
 
-    m "Tada!~"
+    m 4eublb "Tada!~"
 
-    m "Oh, I am missing some accessories!"
+    m 1euc "I am missing some accessories!"
 
-    m "Make sure to re-add them for this outfit!"
+    m 1ekc "Make sure to re-add them please."
     return
 
 
@@ -243,7 +262,7 @@ label monika_outfit_done:
 
     pause 1
 
-    m "Tada!~"
+    m 4eublb "Tada!~"
 
     $ quip = random.choice(kventis_outfit_submod.outfit_quips)
 
@@ -253,13 +272,13 @@ label monika_outfit_done:
 
 label monika_outfit_load:
 
-    m "Sure!"
+    m 1hua "Sure!"
 
     if len(kventis_outfit_submod.outfit_menu_entries) > 0:
 
 
         show monika at t21
-        m "What outfit do you want me to wear?" nointeract
+        m 1eub "Which outfit do you want me to wear?" nointeract
         
         call screen mas_gen_scrollable_menu(kventis_outfit_submod.outfit_menu_entries, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Nevermind", "Nevermind", False, False, 20))
 
@@ -268,10 +287,10 @@ label monika_outfit_load:
         show monika at t11
 
         if sel_outfit_name == "Nevermind":
-            m "Oh okay."
-            return
+            m 1euc "Oh okay."
+            return "prompt"
 
-        m "Hold on a moment.."
+        m 2dua "Hold on a moment.."
 
         call mas_transition_to_emptydesk
 
@@ -312,9 +331,9 @@ label monika_outfit_load:
             call monika_outfit_done
         return
     else:
-        m "Oh wait."
-        m "Aha.. I don't have any outfits saved yet."
-        m "Just let me know if you want an outfit saved."
+        m 1euc "Oh wait."
+        m 3lksdlb "Aha.. I don't have any outfits saved yet."
+        m 1eub "Just let me know if you want an outfit saved."
         return
 
 init 5 python: 
@@ -333,13 +352,13 @@ init 5 python:
 
 label monika_outfit_delete:
     $ import os
-    m "Sure!"
+    m 1hua "Sure!"
 
     if len(kventis_outfit_submod.outfit_menu_entries) > 0:
 
 
         show monika at t21
-        m "What outfit do you want me to delete?" nointeract
+        m 1eub "Which outfit do you want me to delete?" nointeract
         
         call screen mas_gen_scrollable_menu(kventis_outfit_submod.outfit_menu_entries, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Nevermind", "Nevermind", False, False, 20))
 
@@ -348,10 +367,11 @@ label monika_outfit_delete:
         show monika at t11
 
         if sel_outfit_name == "Nevermind":
-            m "Okay, I wont delete any outfits."
-            return
+            m 1etc "Okay,{w=0.4} {nw}"
+            extend 1hua "No outfits deleted!"
+            return "prompt"
         
-        m "Are you sure you want to delete [sel_outfit_name], [player]? "
+        m 1eksdlc "Are you sure you want to delete [sel_outfit_name], [player]? "
         extend "I cant undo this afterwards!{nw}"
         $ _history_list.pop()
         menu: 
@@ -367,12 +387,12 @@ label monika_outfit_delete:
                         removed = True
                     except: 
                         removed = False
-                m "Hold on a moment.{w=0.3}.{w=0.3}"
+                m 2dua "Hold on a moment.{w=0.3}.{w=0.3}"
                 if removed:
-                    m "[sel_outfit_name] deleted!"
+                   3eub  m "[sel_outfit_name] deleted!"
                 else:
-                    m "I couldn't find the file for [sel_outfit_name]!"
-                    m "You can maually delete it from the folder. "
+                    m 1euc "I couldn't find the file for [sel_outfit_name]!"
+                    m 3lksdlb "You can maually delete it from the folder. "
                     m extend "It's called '[sel_outfit_name].json' in the folder 'outfits'!"
                 return
 
@@ -380,9 +400,9 @@ label monika_outfit_delete:
                 m "Aha, okay."
                 return
     else:
-        m "Oh wait."
-        m "Aha.. I don't have any outfits saved yet."
-        m "Just let me know if you want an outfit saved."
+        m 1euc "Oh wait."
+        m 3lksdlb "Aha.. I don't have any outfits saved yet."
+        m 1eub "Just let me know if you want an outfit saved."
         return
 
 # G'day

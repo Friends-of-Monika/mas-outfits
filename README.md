@@ -1,15 +1,20 @@
 # MASOutfits
 A submod that allows you to save monika outfits!
 
+## Sharing Outfits
+You can share outfits with other users by sending the .jsons inside the outfits folder both users must have the same spritepacks installed for it work.
+
 ## Screenshots
 
-Screeshots of the mod do not have expressions implmented.
-
 ### Can you wear an outfit?
-<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/load_example.jpg" style="height:300px;padding:20px">
+<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/load_example.jpg" style="height:250px;padding:20px">
 
 ### Can you save an outfit?
-<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/save_example.jpg" style="height:300px;padding:20px">
+<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/save_example.jpg" style="height:250px;padding:20px">
+
+
+### Can you delete an outfit?
+<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/delete_example.jpg" style="height:250px;padding:20px">
 
 ## Quick Links
 
@@ -36,8 +41,11 @@ Dialogue revisted
 Expressions are still missing
 
 
-### 0.0.3
-In progress
+### 1.0.0
+Dialogue imporved
+
+Expressions added
+
 
 ## Pain Log
 
