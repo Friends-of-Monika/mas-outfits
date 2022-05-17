@@ -174,12 +174,23 @@ label monika_outfit_save:
         # Monika_chr.acs is a huge dict of lists
         # Unsure if I got this right
 
-        if len(monika_chr.acs[3]) > 0:
-            acs.append(monika_chr.acs[3][0].name)
+        #[2] Desk acc such as roses
 
-        if len(monika_chr.acs[10]) > 0:
-            acs.append(monika_chr.acs[10][0].name)
+        print monika_chr.acs
 
+        # Ribbon
+        for item in monika_chr.acs[3]:
+            acs.append(item.name)
+
+        # Earings
+        for item in monika_chr.acs[10]:
+            acs.append(item.name)
+
+        # Choker
+        for item in monika_chr.acs[8]:
+            acs.append(item.name)
+
+        # Flower, Hairclip
         for item in monika_chr.acs[5]:
             acs.append(item.name)
 
@@ -303,6 +314,7 @@ label monika_outfit_load:
             sel_outfit = kventis_outfit_submod.outfits[sel_outfit_name]
             new_clothes = mas_sprites.CLOTH_MAP.get(sel_outfit.get("clothes"), None)
             new_hair = mas_sprites.HAIR_MAP.get(sel_outfit.get("hair"), None)
+            table_acs = [monika_chr.acs[2]]#[2] Desk acc such as roses
             new_acs = []
             missing_acs = False
 
@@ -324,7 +336,9 @@ label monika_outfit_load:
             monika_chr.change_hair(new_hair, True)
             for ac in new_acs:
                 monika_chr.wear_acs(ac)
-
+            for t_array in table_acs:
+                for tac in t_array:
+                    monika_chr.wear_acs(tac)
         if missing_acs:
             call monika_outfit_done_no_acs
             return
