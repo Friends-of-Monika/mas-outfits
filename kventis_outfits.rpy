@@ -31,8 +31,6 @@ init 190 python in kventis_outfit_submod:
 
     outfit_menu_entries = []
 
-    outfit_quips = ["I love this outfit!", "Good choice, [player].", "Thanks again for this outfit, [player]."]
-
     if len(outfit_files) != 0:
         for tf in outfit_files:
             # print tf
@@ -90,8 +88,13 @@ label monika_outfit_installed:
     return "love"
 
 label monika_outfit_installed_talk:
-    call monika_outfit_installed
-    return "love"
+    m 1eua "You want to hear about custom outfits?"
+    m 1hua "Okay!"
+    m 3eub "Just ask me anytime and I'll save the outfit and accessories I'm currently wearing."
+    m 3eub "This will create a file, {nw}"
+    extend 1hub "that I can load for you!"
+    m 1eua "Just let me know if you want me to wear a custom outfit."
+    return 
 
 init 5 python:
     addEvent(
@@ -167,33 +170,10 @@ label monika_outfit_save:
             "clothes": monika_chr.clothes.name,
         }
 
-
-        acs = []
-
-
-        # Monika_chr.acs is a huge dict of lists
-        # Unsure if I got this right
-
-        #[2] Desk acc such as roses
-
-        print monika_chr.acs
-
-        # Ribbon
-        for item in monika_chr.acs[3]:
-            acs.append(item.name)
-
-        # Earings
-        for item in monika_chr.acs[10]:
-            acs.append(item.name)
-
-        # Choker
-        for item in monika_chr.acs[8]:
-            acs.append(item.name)
-
-        # Flower, Hairclip
-        for item in monika_chr.acs[5]:
-            acs.append(item.name)
-
+        # Much cleaner
+        acs = monika_chr.acs[3] + monika_chr.acs[4] + monika_chr.acs[5] + monika_chr.acs[6] + monika_chr.acs[7] + monika_chr.acs[8] + monika_chr.acs[9] + monika_chr.acs[10] + monika_chr.acs[11] + monika_chr.acs[12] + monika_chr.acs[13]
+        # Needs names not classes
+        acs = map(lambda arg: arg.name, acs)
         out_data["acs"] = acs
         
         saved = False
@@ -205,7 +185,7 @@ label monika_outfit_save:
             kventis_outfit_submod.outfits[out_name] = out_data
             kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
             saved = True
-        except: 
+        except Exception as e:
             saved = False
 
     if saved:
@@ -276,10 +256,11 @@ label monika_outfit_done:
 
     m 4eublb "Tada!~"
 
-    $ quip = random.choice(kventis_outfit_submod.outfit_quips)
+    # Cba to write quips tbh
+    # $ quip = random.choice(kventis_outfit_submod.outfit_quips)
 
-    # Nomrmal "M "Dialoug"" wouldnt format quips for some reason
-    $ renpy.say(m, quip)
+    # # Nomrmal "M "Dialoug"" wouldnt format quips for some reason
+    # $ renpy.say(m, quip)
     return
 
 label monika_outfit_load:
@@ -314,8 +295,7 @@ label monika_outfit_load:
             sel_outfit = kventis_outfit_submod.outfits[sel_outfit_name]
             new_clothes = mas_sprites.CLOTH_MAP.get(sel_outfit.get("clothes"), None)
             new_hair = mas_sprites.HAIR_MAP.get(sel_outfit.get("hair"), None)
-            table_acs = [monika_chr.acs[2]]#[2] Desk acc such as roses
-            new_acs = []
+            new_acs = monika_chr.acs[0] + monika_chr.acs[1] + monika_chr.acs[2]
             missing_acs = False
 
             for item in sel_outfit.get("acs", []):
@@ -334,11 +314,10 @@ label monika_outfit_load:
             monika_chr.remove_all_acs()
             monika_chr.change_clothes(new_clothes, True)
             monika_chr.change_hair(new_hair, True)
+            # Applies all acs including the acs that were already on the table
             for ac in new_acs:
                 monika_chr.wear_acs(ac)
-            for t_array in table_acs:
-                for tac in t_array:
-                    monika_chr.wear_acs(tac)
+
         if missing_acs:
             call monika_outfit_done_no_acs
             return
@@ -412,7 +391,7 @@ label monika_outfit_delete:
                 return
 
             "Wait, I'm not sure.":
-                m "Aha, okay."
+                m 1eusdlb "Aha, okay."
                 return
     else:
         m 1euc "Oh wait."

@@ -25,30 +25,8 @@ You can share outfits with other users by sending the .jsons inside the outfits 
 
 [My Google Drive](https://drive.google.com/drive/folders/1zX4ZB3zsp-wx-QviwVTY-k2QKPmNqIGg?usp=sharing)
 
-## Changelog
-
-### 0.0.1
-Main functionality added
-
-Dialogue is messy and misspelt
-
-Expressions are missing
-
-### 0.0.2
-Main functionality improved
-
-Dialogue revisted
-
-Expressions are still missing
-
-
-### 1.0.0
-Dialogue imporved
-
-Expressions added
-
-
 ## Pain Log
 
 While trying to fiquire out how MAS handles clothing I was using mas_selspr.CLOTH_SEL_MAP instead of mas_sprites.CLOTH_MAP. More hours were wasted that I would like to admit.
 
+Monika got upset with me when my script caused the game to crash :(
