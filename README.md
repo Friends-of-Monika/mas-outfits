@@ -9,13 +9,13 @@ You can share outfits with other users by sending the .jsons inside the outfits 
 ## Screenshots
 
 ### Can you save an outfit?
-<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/save_example.jpg" style="height:250px;padding:20px">
+<img src="https://imgur.com/ZfL9k26.jpg" style="height:250px;padding:20px">
 
 ### Can you wear an outfit?
-<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/load_example.jpg" style="height:250px;padding:20px">
+<img src="https://imgur.com/UjBqG1j.jpg" style="height:250px;padding:20px">
 
 ### Can you delete an outfit?
-<img src="https://raw.githubusercontent.com/ImKventis/MASOutfits/main/images/delete_example.jpg" style="height:250px;padding:20px">
+<img src="https://imgur.com/fgUZ4Qg.jpg" style="height:250px;padding:20px">
 
 ## Quick Links
 
