@@ -31,8 +31,8 @@ init 190 python in kventis_outfit_submod:
         outfit_files = os.listdir(outfit_dir)
     except: 
         os.mkdir(outfit_dir)
+        outfit_files = os.listdir(outfit_dir)
 
-    outfit_files = os.listdir(outfit_dir)
 
     
     outfits = {}
