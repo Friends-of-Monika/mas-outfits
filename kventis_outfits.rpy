@@ -25,8 +25,16 @@ init 190 python in kventis_outfit_submod:
 
     outfit_dir = os.path.join(renpy.config.basedir, "outfits")    
 
+    outfit_files = None
+
+    try:
+        outfit_files = os.listdir(outfit_dir)
+    except: 
+        os.mkdir(outfit_dir)
+
     outfit_files = os.listdir(outfit_dir)
 
+    
     outfits = {}
 
     outfit_menu_entries = []
