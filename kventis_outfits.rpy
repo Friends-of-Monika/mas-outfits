@@ -156,11 +156,12 @@ label monika_outfit_save:
                 os.F_OK
             )
 
+    $ overwrite = False
+
     if file_exists:
         m 1eka "I already have an outfit saved called '[out_name]'"
         m "Should I overwrite it?{nw}"
         $ _history_list.pop()
-        $ overwrite = False
         menu:
             m "Should I overwrite it?{fast}"
 
@@ -193,6 +194,7 @@ label monika_outfit_save:
             kventis_outfit_submod.outfits[out_name] = out_data
             if overwrite == False:
                 kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
+                saved = True
             saved = True
         except Exception as e:
             saved = False
