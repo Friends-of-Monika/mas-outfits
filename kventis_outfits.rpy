@@ -50,11 +50,10 @@ init 190 python in kventis_outfit_submod:
                 f.close()
                 outfits[tf[:-5]] = data
                 outfit_menu_entries.append((tf[:-5], tf[:-5], False, False))
-               # print outfit_menu_entries[0][1]
+                # print outfit_menu_entries[0][1]
             except Exception as e:
-               # print e
-               continue
-   # print outfits
+                # print e
+                continue
 
 # Should run once on install with high aff
 init 5 python:
@@ -71,13 +70,13 @@ init 5 python:
 init 5 python:
     addEvent(
         Event(
-              persistent.event_database,
-              eventlabel="monika_outfit_installed_talk",
-              prompt="Can you tell me about custom outfits?",
-              category=['clothes'],
-              pool=True,
-              unlocked=True,
-              aff_range=(mas_aff.NORMAL, None)
+            persistent.event_database,
+            eventlabel="monika_outfit_installed_talk",
+            prompt="Can you tell me about custom outfits?",
+            category=['clothes'],
+            pool=True,
+            unlocked=True,
+            aff_range=(mas_aff.NORMAL, None)
         ),
         markSeen=False
 )
@@ -161,11 +160,12 @@ label monika_outfit_save:
         m 1eka "I already have an outfit saved called '[out_name]'"
         m "Should I overwrite it?{nw}"
         $ _history_list.pop()
+        $ overwrite = False
         menu:
             m "Should I overwrite it?{fast}"
 
             "Yes.":
-                pass
+                $ overwrite = True
 
             "No.":
                 # Jump to beginning
@@ -191,7 +191,8 @@ label monika_outfit_save:
                 out_file.close()
     
             kventis_outfit_submod.outfits[out_name] = out_data
-            kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
+            if overwrite == False:
+                kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
             saved = True
         except Exception as e:
             saved = False
@@ -391,7 +392,7 @@ label monika_outfit_delete:
                         removed = False
                 m 2dua "Hold on a moment.{w=0.3}.{w=0.3}"
                 if removed:
-                   m 3eub "[sel_outfit_name] deleted!"
+                    m 3eub "[sel_outfit_name] deleted!"
                 else:
                     m 1euc "I couldn't find the file for [sel_outfit_name]!"
                     m 3lksdlb "You can maually delete it from the folder. "
