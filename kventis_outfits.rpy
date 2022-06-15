@@ -11,7 +11,7 @@ init -990 python in mas_submod_utils:
         author="Kventis",
         name="Outfit Selector",
         description="A submod that allows you to save and load monika outfits!",
-        version="1.0.4",
+        version="1.0.5",
         dependencies={},
         settings_pane=None,
         version_updates={}
