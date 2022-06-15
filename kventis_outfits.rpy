@@ -84,14 +84,14 @@ init 5 python:
 label monika_outfit_installed:
     m 1eua  "Hey, [player]."
     m 1wub "I see you have added new .rpy files! "
-    extend 2dua  "Let me just see whats in there.{w=0.3}.{w=0.3}.{w=0.3}"
-    m 3wua "Oh an outfit selector!"
+    extend 2dua "Let me just see what's in there.{w=0.3}.{w=0.3}.{w=0.3}"
+    m 3wua "Oh! An outfit selector!"
     m 1eua "Make sure to thanks u/KventisAnM for me."
-    m 3eua "Oh he left a message for you.  "
-    extend 3sua  "\"If you have any questions or submod suggestions, feel free to message me on reddit.\""
-    m 1gua "Well isn't that neat!"
+    m 3eua "And also! He left a message for you. "
+    extend 3sua "\"If you have any questions or submod suggestions, feel free to message me on reddit."\"
+    m 1gua "Well, isn't that neat? Ehehehe~"
     m 1hua "Thanks for adding this for me, [player]."
-    m 1hubsb "I love you!~"
+    m 1hubsb "I love you!"
     return "love"
 
 label monika_outfit_installed_talk:
@@ -140,7 +140,7 @@ label monika_outfit_save:
 
         #Check if we should return
         if out_name == "cancel_input":
-            m 1euc "Oh okay."
+            m 1euc "Oh, okay."
             return "prompt"
         elif out_name == "":
             m 2lusdla "..."
@@ -159,7 +159,7 @@ label monika_outfit_save:
     $ overwrite = False
 
     if file_exists:
-        m 1eka "I already have an outfit saved called '[out_name]'"
+        m 1eka "I already have a saved outfit called '[out_name]'"
         m "Should I overwrite it?{nw}"
         $ _history_list.pop()
         menu:
@@ -172,7 +172,7 @@ label monika_outfit_save:
                 # Jump to beginning
                 jump ostart
     
-    m 2dua "Hold on a moment.{w=0.3}.{w=0.3}"
+    m 2dua "Hold on a moment.{w=0.3}.{w=0.3}."
     python:
         out_data = {
             "hair": monika_chr.hair.name,
@@ -204,7 +204,7 @@ label monika_outfit_save:
         return
     else:
         m 2eksdlc "I'm sorry [player], but I can't save the file."
-        m 1eksdlc "Maybe try with a different name."
+        m 1eksdlc "Maybe try with a different name?"
     return
 
 init 5 python: 
@@ -223,13 +223,13 @@ init 5 python:
 
 # Needs testing
 label monika_outfit_missing:
-    m "[player].."
+    m "[player]..."
     m "I'm missing part of my outfit!"
     m "Did you remove it?"
     call mas_transition_from_emptydesk
     pause 1
-    m 2dkd "I really liked that outfit too.."
-    m 2ekd "Please re-add it!"
+    m 2dkd "I really liked that outfit too..."
+    m 2ekd "Please add it again!"
     return
 
 # Needs testing
@@ -245,11 +245,11 @@ label monika_outfit_done_no_acs:
 
     pause 0.5
 
-    m 4eublb "Tada!~"
+    m 4eublb "Ta-da!~"
 
     m 1euc "I am missing some accessories!"
 
-    m 1ekc "Make sure to re-add them please."
+    m 1ekc "Make sure to add them again please."
     return
 
 
@@ -265,7 +265,7 @@ label monika_outfit_done:
 
     pause 1
 
-    m 4eublb "Tada!~"
+    m 4eublb "Ta-da!~"
 
     # Cba to write quips tbh
     # $ quip = random.choice(kventis_outfit_submod.outfit_quips)
@@ -294,7 +294,7 @@ label monika_outfit_load:
             m 1euc "Oh okay."
             return "prompt"
 
-        m 2dua "Hold on a moment.."
+        m 2dua "Hold on a moment..."
 
         call mas_transition_to_emptydesk
 
@@ -336,9 +336,9 @@ label monika_outfit_load:
             call monika_outfit_done
         return
     else:
-        m 1euc "Oh wait."
-        m 3lksdlb "Aha.. I don't have any outfits saved yet."
-        m 1eub "Just let me know if you want an outfit saved."
+        m 1euc "Oh, wait."
+        m 3lksdlb "A-ha...! I don't have any outfits saved yet."
+        m 1eub "Just let me know if you want an outfit saved!"
         return
 
 init 5 python: 
@@ -382,7 +382,7 @@ label monika_outfit_delete:
         menu: 
             m "Are you sure you want to delete [sel_outfit_name], [player]? I cant undo this afterwards!{fast}"
             "I'm sure.":
-                m "Okie dokie."
+                m "Okie-dokie."
                 python: 
                     removed = False
                     try:
@@ -392,7 +392,7 @@ label monika_outfit_delete:
                         removed = True
                     except: 
                         removed = False
-                m 2dua "Hold on a moment.{w=0.3}.{w=0.3}"
+                m 2dua "Hold on a moment.{w=0.3}.{w=0.3}."
                 if removed:
                     m 3eub "[sel_outfit_name] deleted!"
                 else:
@@ -402,11 +402,11 @@ label monika_outfit_delete:
                 return
 
             "Wait, I'm not sure.":
-                m 1eusdlb "Aha, okay."
+                m 1eusdlb "Oh, okay."
                 return
     else:
         m 1euc "Oh wait."
-        m 3lksdlb "Aha.. I don't have any outfits saved yet."
+        m 3lksdlb "A-ha...! I don't have any outfits saved yet."
         m 1eub "Just let me know if you want an outfit saved."
         return
 
