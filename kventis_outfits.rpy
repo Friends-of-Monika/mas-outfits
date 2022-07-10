@@ -180,7 +180,7 @@ label monika_outfit_save:
         }
 
         # Much cleaner
-        acs = monika_chr.acs[1] + monika_chr.acs[3] + monika_chr.acs[4] + monika_chr.acs[5] + monika_chr.acs[6] + monika_chr.acs[7] + monika_chr.acs[8] + monika_chr.acs[9] + monika_chr.acs[10] + monika_chr.acs[11] + monika_chr.acs[12] + monika_chr.acs[13]
+        acs = monika_chr.acs[0] + monika_chr.acs[1] + monika_chr.acs[3] + monika_chr.acs[4] + monika_chr.acs[5] + monika_chr.acs[6] + monika_chr.acs[7] + monika_chr.acs[8] + monika_chr.acs[9] + monika_chr.acs[10] + monika_chr.acs[11] + monika_chr.acs[12] + monika_chr.acs[13]
         # Needs names not classes
         acs = map(lambda arg: arg.name, acs)
         out_data["acs"] = acs
@@ -306,7 +306,7 @@ label monika_outfit_load:
             sel_outfit = kventis_outfit_submod.outfits[sel_outfit_name]
             new_clothes = mas_sprites.CLOTH_MAP.get(sel_outfit.get("clothes"), None)
             new_hair = mas_sprites.HAIR_MAP.get(sel_outfit.get("hair"), None)
-            new_acs = monika_chr.acs[0] + monika_chr.acs[2]
+            new_acs = monika_chr.acs[2]
             missing_acs = False
 
             for item in sel_outfit.get("acs", []):
