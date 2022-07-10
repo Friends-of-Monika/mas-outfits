@@ -88,7 +88,7 @@ label monika_outfit_installed:
     m 3wua "Oh! An outfit selector!"
     m 1eua "Make sure to thanks u/KventisAnM for me."
     m 3eua "And also! He left a message for you. "
-    extend 3sua "\"If you have any questions or submod suggestions, feel free to message me on reddit."\"
+    extend 3sua "'If you have any questions or submod suggestions, feel free to message me on reddit.'"
     m 1gua "Well, isn't that neat? Ehehehe~"
     m 1hua "Thanks for adding this for me, [player]."
     m 1hubsb "I love you!"
