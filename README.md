@@ -1,6 +1,5 @@
 <h1 align="center">👚 Monika After Story Clothing Saver 👚</h1>
 <h4 align="center">A submod that allows you to save and load outfits</h4>
-<br>
 <p align="center">
   <a href="https://github.com/imkventis/mas_rpc/releases/latest">
     <img alt="Latest release" src="https://img.shields.io/github/v/release/ImKventis/MASOutfits">
