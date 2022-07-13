@@ -13,7 +13,7 @@
 </p>
 
 ## 💚 Details
-- You can share outfits with other users by sending the .jsons inside the outfits folder both users must have the same spritepacks installed for it work.
+You can share outfits with other users by sending the .jsons inside the outfits folder both users must have the same spritepacks installed for it work.
 
 ## 🌟 Screenshots
 
