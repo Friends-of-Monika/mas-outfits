@@ -1,9 +1,9 @@
 
-
-# Submod made with love by u/KventisAnM
-# https://github.com/ImKventis
-# https://www.reddit.com/user/KventisAnM
-
+#
+# █▄▀ █░█ ▀█▀		Written by ImKventis and maintained by my-otter-self 
+# █░█ ▀▄▀ ░█░		https://github.com/ImKventis
+# +my-otter-self    https://github.com/my-otter-self                
+#
 
 
 init -990 python in mas_submod_utils:
