@@ -1,3 +1,6 @@
+# This Is An Archive!
+This repo is an archive of an old project, I dont want to update for the latest version of MAS/Renpy so feel free to fork and update if you would like.
+
 <h1 align="center">👚 Monika After Story Clothing Saver 👚</h1>
 <h4 align="center">A submod that allows you to save and load outfits</h4>
 <p align="center">
