@@ -1,4 +1,3 @@
-
 <h1 align="center">👚 Monika After Story Clothing Saver 👚</h1>
 <h4 align="center">A submod that allows you to save and load outfits</h4>
 <p align="center">
@@ -37,11 +36,3 @@ This submod was developed by these people:
     <img src="https://contrib.rocks/image?repo=ImKventis/MASOutfits&max=6" />
   </a>
 </p>
-
-[@my-otter-self](https://github.com/my-otter-self) is the sole mantainer of this project, as [@ImKventis](https://github.com/ImKventis) - the main concept creator and coder - won't be able to update it anymore.
-
-## 💬 Join our Discord
-
-We're up to chat! Come join us at our Discord server [here](https://mon.icu/discord).
-
-[![Discord server invitation](https://discordapp.com/api/guilds/970747033071804426/widget.png?style=banner3)](https://mon.icu/discord)
