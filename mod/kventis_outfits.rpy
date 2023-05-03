@@ -10,11 +10,9 @@ init -990 python in mas_submod_utils:
     Submod(
         author="Kventis",
         name="Outfit Selector",
+        coauthors=["Friends of Monika"],
         description="A submod that allows you to save and load monika outfits!",
-        version="1.0.5",
-        dependencies={},
-        settings_pane=None,
-        version_updates={}
+        version="1.0.5"
     )
 
 # Loading outfit jsons
