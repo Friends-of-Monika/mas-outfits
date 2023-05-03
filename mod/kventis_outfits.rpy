@@ -1,8 +1,8 @@
 
 #
-# █▄▀ █░█ ▀█▀		Written by ImKventis and maintained by my-otter-self 
+# █▄▀ █░█ ▀█▀		Originally made by ImKventis and maintained by Friends of Monika
 # █░█ ▀▄▀ ░█░		https://github.com/ImKventis
-# +my-otter-self    https://github.com/my-otter-self                
+#                    https://github.com/Friends-of-Monika
 #
 
 
@@ -23,18 +23,18 @@ init 190 python in kventis_outfit_submod:
     import os
     import json
 
-    outfit_dir = os.path.join(renpy.config.basedir, "outfits")    
+    outfit_dir = os.path.join(renpy.config.basedir, "outfits")
 
     outfit_files = None
 
     try:
         outfit_files = os.listdir(outfit_dir)
-    except: 
+    except:
         os.mkdir(outfit_dir)
         outfit_files = os.listdir(outfit_dir)
 
 
-    
+
     outfits = {}
 
     outfit_menu_entries = []
@@ -101,7 +101,7 @@ label monika_outfit_installed_talk:
     m 3eub "This will create a file, {nw}"
     extend 1hub "that I can load for you!"
     m 1eua "Just let me know if you want me to wear a custom outfit."
-    return 
+    return
 
 init 5 python:
     addEvent(
@@ -120,7 +120,7 @@ init 5 python:
 label monika_outfit_save:
     $ import json
     $ import os
-    
+
     m 1hua "Sure!"
 
     label ostart:
@@ -148,7 +148,7 @@ label monika_outfit_save:
         else:
             $ done = True
 
-    python: 
+    python:
         outfit_file = os.path.join(kventis_outfit_submod.outfit_dir, out_name + ".json")
 
         file_exists = os.access(
@@ -171,7 +171,7 @@ label monika_outfit_save:
             "No.":
                 # Jump to beginning
                 jump ostart
-    
+
     m 2dua "Hold on a moment.{w=0.3}.{w=0.3}."
     python:
         out_data = {
@@ -184,13 +184,13 @@ label monika_outfit_save:
         # Needs names not classes
         acs = map(lambda arg: arg.name, acs)
         out_data["acs"] = acs
-        
+
         saved = False
         try:
             with open(outfit_file, "w+") as out_file:
                 json.dump(out_data, out_file)
                 out_file.close()
-    
+
             kventis_outfit_submod.outfits[out_name] = out_data
             if overwrite == False:
                 kventis_outfit_submod.outfit_menu_entries.append((out_name, out_name, False, False))
@@ -207,7 +207,7 @@ label monika_outfit_save:
         m 1eksdlc "Maybe try with a different name?"
     return
 
-init 5 python: 
+init 5 python:
     addEvent(
         Event(
             persistent.event_database,
@@ -283,7 +283,7 @@ label monika_outfit_load:
 
         show monika at t21
         m 1eub "Which outfit do you want me to wear?" nointeract
-        
+
         call screen mas_gen_scrollable_menu(kventis_outfit_submod.outfit_menu_entries, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Nevermind", "Nevermind", False, False, 20))
 
         $ sel_outfit_name = _return
@@ -300,7 +300,7 @@ label monika_outfit_load:
 
         pause 2
 
-        python: 
+        python:
             # Get all atrributes of outfit fills with None if missing
             # Dont have to check if new_clothes and new_hair in json dict as they always are.
             sel_outfit = kventis_outfit_submod.outfits[sel_outfit_name]
@@ -321,7 +321,7 @@ label monika_outfit_load:
             call monika_outfit_missing
             return
 
-        python: 
+        python:
             monika_chr.remove_all_acs()
             monika_chr.change_clothes(new_clothes, True)
             monika_chr.change_hair(new_hair, True)
@@ -341,7 +341,7 @@ label monika_outfit_load:
         m 1eub "Just let me know if you want an outfit saved!"
         return
 
-init 5 python: 
+init 5 python:
     addEvent(
         Event(
             persistent.event_database,
@@ -364,7 +364,7 @@ label monika_outfit_delete:
 
         show monika at t21
         m 1eub "Which outfit do you want me to delete?" nointeract
-        
+
         call screen mas_gen_scrollable_menu(kventis_outfit_submod.outfit_menu_entries, mas_ui.SCROLLABLE_MENU_TXT_MEDIUM_AREA, mas_ui.SCROLLABLE_MENU_XALIGN, ("Nevermind", "Nevermind", False, False, 20))
 
         $ sel_outfit_name = _return
@@ -375,22 +375,22 @@ label monika_outfit_delete:
             m 1etc "Okay,{w=0.4} {nw}"
             extend 1hua "No outfits deleted!"
             return "prompt"
-        
+
         m 1eksdlc "Are you sure you want to delete [sel_outfit_name], [player]? "
         extend "I cant undo this afterwards!{nw}"
         $ _history_list.pop()
-        menu: 
+        menu:
             m "Are you sure you want to delete [sel_outfit_name], [player]? I cant undo this afterwards!{fast}"
             "I'm sure.":
                 m "Okie-dokie."
-                python: 
+                python:
                     removed = False
                     try:
                         os.remove(os.path.join(kventis_outfit_submod.outfit_dir, sel_outfit_name + ".json"))
                         kventis_outfit_submod.outfit_menu_entries.remove((sel_outfit_name, sel_outfit_name, False, False))
                         kventis_outfit_submod.outfits.pop(sel_outfit_name)
                         removed = True
-                    except: 
+                    except:
                         removed = False
                 m 2dua "Hold on a moment.{w=0.3}.{w=0.3}."
                 if removed:
