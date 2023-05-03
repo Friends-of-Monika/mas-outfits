@@ -2,7 +2,7 @@
 <h4 align="center">A submod that allows you to save and load outfits</h4>
 <p align="center">
   <a href="https://github.com/friends-of-monika/mas-outfits/releases/latest">
-    <img alt="Latest release" src="https://img.shields.io/github/v/release/ImKventis/MASOutfits">
+    <img alt="Latest release" src="https://img.shields.io/github/v/release/friends-of-monika/mas-outfits">
   </a>
   <a href="https://github.com/friends-of-monika/mas-outfits/blob/main/LICENSE.txt">
     <img alt="Creative Commons BY-NC-ND 4.0 license badge" src="https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg">
