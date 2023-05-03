@@ -1,20 +1,18 @@
 <h1 align="center">👚 Monika After Story Clothing Saver 👚</h1>
 <h4 align="center">A submod that allows you to save and load outfits</h4>
 <p align="center">
-  <a href="https://github.com/imkventis/mas_rpc/releases/latest">
+  <a href="https://github.com/friends-of-monika/mas-outfits/releases/latest">
     <img alt="Latest release" src="https://img.shields.io/github/v/release/ImKventis/MASOutfits">
   </a>
-  <a href="https://github.com/imkventis/masoutfits/blob/main/LICENSE.txt">
+  <a href="https://github.com/friends-of-monika/mas-outfits/blob/main/LICENSE.txt">
     <img alt="Creative Commons BY-NC-ND 4.0 license badge" src="https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg">
   </a>
 </p>
 
-## ⚠️ Important notice (please read!)
-
-This submod is no longer mantained as of Monika After Story's recent update (v0.12.12). I, Otter, the main dev, decided to stop creating submods and focusing on working on the main mod, Monika After Story. It has always been my dream to focus on contributing officially and it's wonderful to be able to actually do that. Thank you so much for your support so far and all the kind and appreciative words. Also thanks for the understanding. You can follow my work in the future MAS official mod releases.
-
 ## 💚 Details
-You can share outfits with other users by sending the .jsons inside the outfits folder both users must have the same spritepacks installed for it work.
+You can share outfits with other users by sending the .json files inside the
+outfits folder; **both users** must have the same spritepacks installed for it
+to work.
 
 ## 🌟 Screenshots
 
@@ -29,10 +27,6 @@ You can share outfits with other users by sending the .jsons inside the outfits 
 
 ## ✒️ Authors
 
-This submod was developed by these people:
-
-<p align="center">
-  <a href="https://github.com/ImKventis/MASOutfits/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=ImKventis/MASOutfits&max=6" />
-  </a>
-</p>
+This mod was originally developed by @ImKventis and later taken by Otter.
+Since November '22, this mod is under Friends of Monika maintenance after
+Otter has left the submodding community.
