@@ -12,8 +12,16 @@ init -990 python in mas_submod_utils:
         name="Outfit Selector",
         coauthors=["Friends of Monika"],
         description="A submod that allows you to save and load monika outfits!",
-        version="1.0.5"
+        version="1.0.6"
     )
+
+init -989 python:
+    if store.mas_submod_utils.isSubmodInstalled("Submod Updater Plugin"):
+        store.sup_utils.SubmodUpdater(
+            submod="Outfit Selector",
+            user_name="Friends-of-Monika",
+            repository_name="MAS-Outfits"
+        )
 
 # Loading outfit jsons
 # I'm not sure if 190 is the correct init level, but it works
